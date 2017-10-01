@@ -30,19 +30,6 @@ export default {
     h2 {
         font-size: 180%;
     }
-    input[type="button"] {
-        padding: 10px;
-        font-size: 110%;
-        color: #d7d6d6;
-        background-color: #3a4e48;
-        font-variant: small-caps;
-        border: none;
-        border-radius: 5px;
-    }
-    input[type="button"]:hover {
-        color: #a1cda8;
-        cursor: pointer;
-    }
     #about {
         margin-top: 20px;
     }

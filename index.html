@@ -21,6 +21,45 @@
         a:hover {
             font-weight: normal;
         }
+        input[type="button"],
+        input[type="submit"] {
+            padding: 10px;
+            font-size: 110%;
+            color: #d7d6d6;
+            background-color: #3a4e48;
+            font-variant: small-caps;
+            border: none;
+            border-radius: 5px;
+        }
+        input[type="button"]:hover,
+        input[type="submit"]:hover {
+            color: #a1cda8;
+            cursor: pointer;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            padding: 4px;
+            border: 1px solid transparent;
+            border-radius: 5px;
+            text-align: center;
+        }
+        input[type="text"].invalid,
+        input[type="email"].invalid,
+        input[type="password"].invalid {
+            background-color: #cda1a1;
+        }
+        .form-row {
+            margin: 4px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .form-row label {
+            flex: 1;
+        }
+        .form-row input {
+            flex: 3;
+        }
     </style>
   </head>
   <body>
