@@ -2,6 +2,24 @@
     <div id="signup">
         <h2>Sign up</h2>
         <form action="#" method="post">
+            <div class="message error" v-if="showError">
+                <p v-if="nameInvalid">
+                    Name cannot be empty
+                </p>
+                <p v-if="emailInvalid">
+                    Email cannot be empty
+                </p>
+                <p v-if="passwordInvalid">
+                    Password cannot be empty
+                </p>
+                <p v-if="repeatPasswordInvalid">
+                    Repeat password cannot be empty
+                </p>
+                <p v-if="passwordsDontMatch">
+                    Your passwords do not match
+                </p>
+
+            </div>
             <div>
                 <section class="form-row">
                     <label for="name">Name: </label>
@@ -27,7 +45,7 @@
                 </section>
             </div>
             <section class="btn-wrapper">
-                <input type="submit" value="Sign Up" v-on:click="submitForm()">
+                <input type="submit" value="Sign Up" v-on:click="submitForm">
             </section>
         </form>
     </div>
@@ -47,18 +65,29 @@ export default {
             passwordInvalid: false,
             repeatPasswordInvalid: false,
             passwordsDontMatch: false,
+            showError: false,
+            hasClickedSubmit: false
         }
     },
     methods: {
         validateForm: function() {
+            if(!this.hasClickedSubmit) return;
+
             this.nameInvalid = this.name.length === 0;
             this.emailInvalid  = this.email.length === 0;
             this.passwordInvalid = this.password.length === 0;
             this.repeatPasswordInvalid = this.repeatPassword.length === 0;
             this.passwordsDontMatch = (this.password !== this.repeatPassword);
-            return !(this.nameInvalid || this.emailInvalid || this.passwordInvalid || this.repeatPasswordInvalid || this.passwordsDontMatch);
+
+            var isValid = !(this.nameInvalid || this.emailInvalid || this.passwordInvalid || this.repeatPasswordInvalid || this.passwordsDontMatch);
+
+            this.showError = !isValid;
+
+            return isValid;
         },
-        submitForm: function() {
+        submitForm: function(e) {
+            e.preventDefault();
+            this.hasClickedSubmit = true;
             if(this.validateForm()) {
                 console.log("Submitting form");
                 // TODO submit form
