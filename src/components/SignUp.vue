@@ -1,25 +1,27 @@
 <template>
     <div id="signup">
         <h2>Sign up</h2>
-        <form action="#" method="post">
-            <div class="message error" v-if="showError">
-                <p v-if="nameInvalid">
-                    Name cannot be empty
-                </p>
-                <p v-if="emailInvalid">
-                    Email cannot be empty
-                </p>
-                <p v-if="passwordInvalid">
-                    Password cannot be empty
-                </p>
-                <p v-if="repeatPasswordInvalid">
-                    Repeat password cannot be empty
-                </p>
-                <p v-if="passwordsDontMatch">
-                    Your passwords do not match
-                </p>
-
-            </div>
+        <div class="message error" v-if="showError">
+            <p v-if="nameInvalid">
+                Name cannot be empty
+            </p>
+            <p v-if="emailInvalid">
+                Email cannot be empty
+            </p>
+            <p v-if="passwordInvalid">
+                Password cannot be empty
+            </p>
+            <p v-if="repeatPasswordInvalid">
+                Repeat password cannot be empty
+            </p>
+            <p v-if="passwordsDontMatch">
+                Your passwords do not match
+            </p>
+            <p v-if="codeInvalid">
+                The code you entered is not valid. You may have mistyped the code. It is also possible the code expired. Please try again.
+            </p>
+        </div>
+        <form action="#" method="post" v-if="currentSection === 'form'">
             <div>
                 <section class="form-row">
                     <label for="name">Name: </label>
@@ -48,6 +50,18 @@
                 <input type="submit" value="Sign Up" v-on:click="submitForm">
             </section>
         </form>
+        <form action="#" method="post" v-if="currentSection === 'emailConfirmation'">
+            <section class="form-row">
+                <label for="confirmation-code">Enter your confirmation code:</label>
+                <input type="text" id="confirmation-code" name="confirmation-code" required v-model="confirmationCode">
+            </section>
+            <section class="btn-wrapper">
+                <input type="submit" value="Finish" v-on:click="submitEmailConfirmation">
+            </section>
+        </form>
+        <div v-if="currentSection === 'finished'">
+            <strong>Thank you for registering. You can now continue on and start using Trite.</strong>
+        </div>
     </div>
 </template>
 
@@ -66,7 +80,10 @@ export default {
             repeatPasswordInvalid: false,
             passwordsDontMatch: false,
             showError: false,
-            hasClickedSubmit: false
+            hasClickedSubmit: false,
+            currentSection: 'form',
+            confirmationCode: "",
+            codeInvalid: false
         }
     },
     methods: {
@@ -91,8 +108,22 @@ export default {
             if(this.validateForm()) {
                 console.log("Submitting form");
                 // TODO submit form
+                this.currentSection = 'emailConfirmation';
             } else {
                 console.log("Form is invalid. Cannot submit");
+            }
+        },
+        submitEmailConfirmation: function(e) {
+            e.preventDefault();
+            // TODO send request to confirm the code
+            console.log("Veryfing confirmation code");
+            this.codeInvalid = Math.round(Math.random(1)) === 0;
+
+            if(this.codeInvalid) {
+                this.codeInvalid = true;
+                this.showError = true;
+            } else {
+                this.currentSection = "finished";
             }
         }
     }
