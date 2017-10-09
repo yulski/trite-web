@@ -118,6 +118,7 @@ export default {
             // TODO send request to confirm the code
             console.log("Veryfing confirmation code");
             this.codeInvalid = Math.round(Math.random(1)) === 0;
+            this.showError = !this.codeInvalid;
 
             if(this.codeInvalid) {
                 this.codeInvalid = true;
