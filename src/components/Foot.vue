@@ -15,6 +15,7 @@ export default {
 
 <style scoped>
     #foot {
+        flex-shrink: 0;
         font-size: 90%;
         text-align: center;
         background: #a1cda8;

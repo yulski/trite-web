@@ -14,22 +14,19 @@ import Foot from "./components/Foot.vue";
 
 export default {
   name: "app",
-  components: { navbar: NavBar, foot: Foot },
-  data () {
-    return {
-      // msg: 'Welcome to Your Vue.js App'
-    }
-  }
+  components: { navbar: NavBar, foot: Foot }
 }
 </script>
 
 <style scoped>
     #app {
-        height: 100%;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
     }
     #wrapper {
-        height: 100%;
+        flex: 1 0 auto;
         width: 70%;
-        margin: 150px auto -270px auto;
+        margin: 150px auto 0 auto;
     }
 </style>

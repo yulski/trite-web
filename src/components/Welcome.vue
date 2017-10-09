@@ -34,9 +34,3 @@ export default {
         margin-top: 20px;
     }
 </style>
-<style>
-    /* TODO remove this once body height & position get fixed */
-    body {
-        overflow: hidden;
-    }
-</style>
