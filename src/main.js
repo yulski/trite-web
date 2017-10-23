@@ -3,6 +3,7 @@ import VueRouter from "vue-router"
 import App from "./App.vue"
 import Welcome from "./components/Welcome.vue"
 import SignUp from "./components/SignUp.vue"
+import Settings from "./components/Settings.vue"
 
 Vue.use(VueRouter);
 
@@ -13,7 +14,8 @@ const routes = [
     { path: "/foo", name: "foo", component: Foo },
     { path: "/bar", name: "bar", component: Bar },
     { path: "/", name: "welcome", component: Welcome },
-    { path: "/signup", name: "signup", component: SignUp }
+    { path: "/signup", name: "signup", component: SignUp },
+    { path: "/settings", name: "settings", component: Settings }
 ];
 
 const router = new VueRouter({

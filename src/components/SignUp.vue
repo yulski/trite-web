@@ -46,7 +46,7 @@
                         v-on:input="validateForm()">
                 </section>
             </div>
-            <section class="btn-wrapper">
+            <section class="submit-btn-wrapper">
                 <input type="submit" value="Sign Up" v-on:click="submitForm">
             </section>
         </form>
@@ -55,7 +55,7 @@
                 <label for="confirmation-code">Enter your confirmation code:</label>
                 <input type="text" id="confirmation-code" name="confirmation-code" required v-model="confirmationCode">
             </section>
-            <section class="btn-wrapper">
+            <section class="submit-btn-wrapper">
                 <input type="submit" value="Finish" v-on:click="submitEmailConfirmation">
             </section>
         </form>
@@ -130,11 +130,3 @@ export default {
     }
 }
 </script>
-
-<style>
-    .btn-wrapper {
-        margin-top: 10px;
-        width: 100%;
-        text-align: center;
-    }
-</style>

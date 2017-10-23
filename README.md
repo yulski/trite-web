@@ -1,10 +1,10 @@
 # trite-web
 
-> Web app for to check when my internet is down\"
+> Web app for to check when my internet is down
 
 This is the Vue front-end of the application.
 
-I probably have (or will soon) some other repo with the back-end code. 
+I probably have (or will soon) some other repo with the back-end code.
 
 ## Build Setup
 
