@@ -4,18 +4,15 @@ import App from "./App.vue"
 import Welcome from "./components/Welcome.vue"
 import SignUp from "./components/SignUp.vue"
 import Settings from "./components/Settings.vue"
+import Dashboard from "./components/Dashboard.vue"
 
 Vue.use(VueRouter);
 
-const Foo = { template: "<h1>foo</h1>" };
-const Bar = { template: "<h1>bar</h1>" };
-
 const routes = [
-    { path: "/foo", name: "foo", component: Foo },
-    { path: "/bar", name: "bar", component: Bar },
     { path: "/", name: "welcome", component: Welcome },
     { path: "/signup", name: "signup", component: SignUp },
-    { path: "/settings", name: "settings", component: Settings }
+    { path: "/settings", name: "settings", component: Settings },
+    { path: "/dashboard", name: "dashboard", component: Dashboard }
 ];
 
 const router = new VueRouter({

@@ -11,6 +11,9 @@
             <li>
                 <router-link :to="{ name: 'settings' }">Settings</router-link>
             </li>
+            <li>
+                <router-link :to="{ name: 'dashboard' }">Dashboard</router-link>
+            </li>
         </ul>
     </nav>
 </template>
