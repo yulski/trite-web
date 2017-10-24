@@ -3,10 +3,13 @@
         <h1><router-link to="/">TRITE</router-link></h1>
         <ul>
             <li>
-                <router-link :to="{ name: 'foo' }">Go to foo</router-link>
+                <router-link :to="{ name: 'welcome' }">Welcome</router-link>
             </li>
             <li>
-                <router-link :to="{ name: 'bar' }">Go to bar</router-link>
+                <router-link :to="{ name: 'signup' }">Sign Up</router-link>
+            </li>
+            <li>
+                <router-link :to="{ name: 'settings' }">Settings</router-link>
             </li>
         </ul>
     </nav>
