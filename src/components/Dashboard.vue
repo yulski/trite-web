@@ -13,9 +13,7 @@
                     &#11206;
                 </a>
             </div>
-            <div class="report-contents" v-if="showCurrentDay">
-                current day's report goes here
-            </div>
+            <report v-if="showCurrentDay" :reportModel="allReports.today"/>
         </div>
         <div id="this-week" class="report-section">
             <div class="report-section-title">
@@ -24,9 +22,7 @@
                     &#11206;
                 </a>
             </div>
-            <div class="report-contents" v-if="showThisWeek">
-                this week's report goes here
-            </div>
+            <report v-if="showThisWeek" :reportModel="allReports.thisWeek"/>
         </div>
         <div id="this-month" class="report-section">
             <div class="report-section-title">
@@ -35,9 +31,7 @@
                     &#11206;
                 </a>
             </div>
-            <div class="report-contents" v-if="showThisMonth">
-                this month's report goes here
-            </div>
+            <report v-if="showThisMonth" :reportModel="allReports.thisMonth"/>
         </div>
         <div id="overall-report" class="report-section">
             <div class="report-section-title">
@@ -46,14 +40,17 @@
                     &#11206;
                 </a>
             </div>
-            <div class="report-contents" v-if="showOverall">
-                overall report goes here
-            </div>
+            <report v-if="showOverall" :reportModel="allReports.overall"/>
         </div>
     </div>
 </template>
 
 <script>
+import Report from "./Report.vue";
+import ReportModel from "../models/report.js";
+import ReportService from "../services/report-service.js";
+
+var reportService = new ReportService();
 
 Date.prototype.toDateInputValue = function () {
     var local = new Date(this);
@@ -69,7 +66,8 @@ export default {
             showCurrentDay: true,
             showThisWeek: true,
             showThisMonth: true,
-            showOverall: true
+            showOverall: true,
+            allReports: reportService.getAllReports()
         }
     },
     methods: {
@@ -94,7 +92,8 @@ export default {
             this.showOverall = !this.showOverall;
             this.toggleCaret(e.target);
         }
-    }
+    },
+    components: { report: Report }
 }
 </script>
 
