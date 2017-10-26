@@ -3,39 +3,39 @@
         <h2>Your Dashboard</h2>
         <section>
             <label for="pick-day">Pick another day to view report from: </label>
-            <input type="date" id="pick-date" v-model="currentDay">
+            <input type="date" id="pick-date" v-model="day" v-on:change="loadReportsForSelectedDate">
         </section>
         <hr>
-        <div id="current-day" class="report-section">
+        <div id="day" class="report-section">
             <div class="report-section-title">
-                <h3>Current day ({{currentDay}})</h3>
-                <a class="report-section-caret" v-on:click="toggleCurrentDay">
+                <h3>Daily report</h3>
+                <a class="report-section-caret" v-on:click="toggleDay">
                     &#11206;
                 </a>
             </div>
-            <report v-if="showCurrentDay" :reportModel="allReports.today"/>
+            <report v-if="showDay" :reportModel="allReports.day"/>
         </div>
-        <div id="this-week" class="report-section">
+        <div id="week" class="report-section">
             <div class="report-section-title">
-                <h3>This week</h3>
-                <a class="report-section-caret" v-on:click="toggleThisWeek">
+                <h3>Weekly report</h3>
+                <a class="report-section-caret" v-on:click="toggleWeek">
                     &#11206;
                 </a>
             </div>
-            <report v-if="showThisWeek" :reportModel="allReports.thisWeek"/>
+            <report v-if="showWeek" :reportModel="allReports.week"/>
         </div>
-        <div id="this-month" class="report-section">
+        <div id="month" class="report-section">
             <div class="report-section-title">
-                <h3>This month</h3>
-                <a class="report-section-caret" v-on:click="toggleThisMonth">
+                <h3>Monthly report</h3>
+                <a class="report-section-caret" v-on:click="toggleMonth">
                     &#11206;
                 </a>
             </div>
-            <report v-if="showThisMonth" :reportModel="allReports.thisMonth"/>
+            <report v-if="showMonth" :reportModel="allReports.month"/>
         </div>
         <div id="overall-report" class="report-section">
             <div class="report-section-title">
-                <h3>Overall</h3>
+                <h3>Overall report</h3>
                 <a class="report-section-caret" v-on:click="toggleOverall">
                     &#11206;
                 </a>
@@ -47,7 +47,7 @@
 
 <script>
 import Report from "./Report.vue";
-import ReportModel from "../models/report.js";
+import { Report as ReportModel, ReportBuilder } from "../models/Report.js";
 import ReportService from "../services/report-service.js";
 
 var reportService = new ReportService();
@@ -62,10 +62,10 @@ export default {
     name: "dashboard",
     data: function() {
         return {
-            currentDay: new Date().toDateInputValue(),
-            showCurrentDay: true,
-            showThisWeek: true,
-            showThisMonth: true,
+            day: new Date().toDateInputValue(),
+            showDay: true,
+            showWeek: true,
+            showMonth: true,
             showOverall: true,
             allReports: reportService.getAllReports()
         }
@@ -76,21 +76,24 @@ export default {
                 downCaret = "\u2bc6";
                 elem.innerHTML = elem.innerHTML === upCaret ? downCaret : upCaret;
         },
-        toggleCurrentDay: function(e) {
-            this.showCurrentDay = !this.showCurrentDay;
+        toggleDay: function(e) {
+            this.showDay = !this.showDay;
             this.toggleCaret(e.target);
         },
-        toggleThisWeek: function(e) {
-            this.showThisWeek = !this.showThisWeek;
+        toggleWeek: function(e) {
+            this.showWeek = !this.showWeek;
             this.toggleCaret(e.target);
         },
-        toggleThisMonth: function(e) {
-            this.showThisMonth = !this.showThisMonth;
+        toggleMonth: function(e) {
+            this.showMonth = !this.showMonth;
             this.toggleCaret(e.target);
         },
         toggleOverall: function(e) {
             this.showOverall = !this.showOverall;
             this.toggleCaret(e.target);
+        },
+        loadReportsForSelectedDate: function(e) {
+            this.allReports = reportService.getAllReports(e.target.valueAsDate);
         }
     },
     components: { report: Report }
